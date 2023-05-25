@@ -11,7 +11,8 @@ const Todo = () => {
             alert("Please fill the Task")
         }
         else {
-            setItems([...items, inputData])
+            setItems([...items, inputData]);
+            setInputData("");
         }
     }
 
