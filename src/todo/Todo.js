@@ -31,13 +31,21 @@ const Todo = () => {
 
                 {/* show our items */}
                 <div className="showItems">
-                    <div className="eachItem">
-                        <h3>Apple</h3>
-                        <div className="todo-btn">
-                        <i className="far fa-edit add-btn"></i>
-                        <i className="far fa-trash-alt add-btn"></i>
-                        </div>
-                    </div>
+                    {
+                        items.map((currElem, index)=>{
+                            return (
+                                <>
+                                    <div className="eachItem" key={index}>
+                                        <h3>{currElem}</h3>
+                                        <div className="todo-btn">
+                                            <i className="far fa-edit add-btn"></i>
+                                            <i className="far fa-trash-alt add-btn"></i>
+                                        </div>
+                                    </div>
+                                </>
+                            )
+                        })
+                    }
                 </div>
 
                 {/* Remove All button */}
