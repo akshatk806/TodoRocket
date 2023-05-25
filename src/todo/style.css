@@ -107,8 +107,9 @@ input:focus {
 }
 
 .showItems {
-    margin-top: 3rem;
     text-align: center;
+    max-width: 409px;
+    margin: 2.5rem auto;
 }
 
 .eachItem {
