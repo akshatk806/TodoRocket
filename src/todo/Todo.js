@@ -1,9 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./style.css"
+
+// get the local storage data back 
+const getLocalData = ()=>{
+    const lists = localStorage.getItem("myTodoList");
+
+    if(lists) {
+        return JSON.parse(lists);     // lists to hamara string hoga, first hum string ko array me convert karenge then hum is lists ko items me assign kar denge in line 18
+    }
+    else {
+        return [];
+    }
+}
 
 const Todo = () => {
     const [inputData, setInputData] = useState(""); 
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState(getLocalData());
 
     // function for adding the items in todo list
     const addItem = ()=>{
@@ -33,6 +45,12 @@ const Todo = () => {
     const removeAll = () =>{
         setItems([]);
     }
+
+
+    // adding the task in localStorage using useEffect
+    useEffect(()=>{
+        localStorage.setItem("myTodoList", JSON.stringify(items));        // localStorage me hum sirf string hi paas kar sakte h, We want to make sure that inputs must be string only
+    },[items]);        // jab mere items ki values change hogi tab hi useEffect run karega and local storage update hoga
 
   return (
     <>
