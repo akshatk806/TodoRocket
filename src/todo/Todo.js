@@ -11,9 +11,27 @@ const Todo = () => {
             alert("Please fill the Task")
         }
         else {
-            setItems([...items, inputData]);
+            const myNewInputData = {
+                id:new Date().getTime().toString(),
+                name:inputData
+            }
+            setItems([...items, myNewInputData]);
             setInputData("");
         }
+    }
+
+    // function to delete the task from DOM
+    const deleteItem = (index)=>{
+        // user ne kisko click kiya uski me yha get kar rha hu
+        const updatedItems = items.filter((currElem)=>{
+            return currElem.id !== index;
+        });
+        setItems(updatedItems)
+    }
+
+    // removing all the tasks in one click
+    const removeAll = () =>{
+        setItems([]);
     }
 
   return (
@@ -33,27 +51,23 @@ const Todo = () => {
                 {/* show our items */}
                 <div className="showItems">
                     {
-                        items.map((currElem, index)=>{
+                        items.map((currElem)=>{
                             return (
-                                <>
-                                    <div className="eachItem" key={index}>
-                                        <h3>{currElem}</h3>
-                                        <div className="todo-btn">
-                                            <i className="far fa-edit add-btn"></i>
-                                            <i className="far fa-trash-alt add-btn"></i>
-                                        </div>
+                                <div key={currElem.id} className="eachItem">
+                                    <h3>{currElem.name}</h3>
+                                    <div className="todo-btn">
+                                        <i className="far fa-edit add-btn"></i>
+                                        <i className="far fa-trash-alt add-btn" onClick={()=>deleteItem(currElem.id)}></i>
                                     </div>
-                                </>
+                                </div>
                             )
                         })
                     }
                 </div>
 
                 {/* Remove All button */}
-
-
                 <div className="showItems">
-                    <button className="btn effect04" data-sm-link-text="Remove All"><span>CHECK LIST</span></button>
+                    <button className="btn effect04" data-sm-link-text="Remove All" onClick={removeAll}><span>CHECK LIST</span></button>
                 </div>
             </div>
         </div>
